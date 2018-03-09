@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ExpediaExcercise2.Models.Hotel>
+
+@{
+    ViewBag.Title = "ShowHotelDeals";
+}
+
+<h2>Welcome to Expedia!</h2>
+
+<p>
+  
+</p>
+<table class="table">
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+
+    @using (Html.BeginForm(FormMethod.Post))
+    {
+            <p>
+                Destination Name: @Html.TextBox("DestinationName", TempData["Destination"])<br /><br />
+                Check-in: @Html.TextBox("StartDate", TempData["StartDate"], new { @class = "datepicker", @type = "date" })
+                Check-out: @Html.TextBox("EndDate", TempData["EndDate"], new { @class = "datepicker", @type = "date" })<br /><br />
+                Star Rate in the range of : @Html.TextBox("MinStarRate", TempData["MinStarRate"]) to @Html.TextBox("MaxStarRate", TempData["MaxStarRate"])<br /><br />
+                Guest review rate in the range of : @Html.TextBox("MinGuestRate", TempData["MinGuestRate"]) to @Html.TextBox("MaxGuestRate", TempData["MaxGuestRate"])<br /><br />
+                Total rate in the range of : @Html.TextBox("MinTotalRate", TempData["MinTotalRate"]) to @Html.TextBox("MaxTotalRate", TempData["MaxTotalRate"])<br /><br />
+                <input class="btn btn-primary btn-sm" type="submit" value="search" width="100" size="100" />
+            </p>
+    }
+
+    <tr>
+        <th>Hotel Name</th>
+        <th>Image</th>
+        <th>Star rating</th>
+        <th>City</th>
+        <th>Street Address</th>
+        <th>Starts from ($)</th>
+    </tr>
+
+    @if (Model != null)
+    {
+
+        foreach (var item in Model)
+        {
+            var starRating = double.Parse(@item.hotelInfo.hotelStarRating);
+            <tr>
+                <td><B>@item.hotelInfo.hotelName</B></td>
+                <td><img id="1" src="@item.hotelInfo.hotelImageUrl" width="130" height="130"/></td>
+               
+                <td>
+                    
+                    @for (int i = 0; i < starRating; i++)
+                    {
+                        <span class="glyphicon glyphicon-star"></span>
+                    }
+                </td>
+                <td>@item.hotelInfo.hotelCity</td> <td>@item.hotelInfo.hotelStreetAddress</td>
+                <td><B>$@item.hotelPricingInfo.totalPriceValue</B></td> 
+        
+            </tr>
+        }
+    }
+
+</table>

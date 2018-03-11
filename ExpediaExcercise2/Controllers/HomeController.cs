@@ -35,6 +35,9 @@ namespace ExpediaExcercise2.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        /* This overload of the ShowHotelDeals takes no paramters.
+         * It is the one called when the page is rendered for the first time
+         */
         public ActionResult ShowHotelDeals()
         {
             Models.HotelDealsData objHotelDealsData = null;
@@ -44,8 +47,8 @@ namespace ExpediaExcercise2.Controllers
             return View(objHotelDealsData.offers.Hotel);
         }
 
-        /* Handler for the Search button.
-         * Microsoft.AspNetCore.Http.IFormCollection
+        /* 2nd overload of the ShowHotelDeals takes a parameter of type : Microsoft.AspNetCore.Http.IFormCollection
+         * It also serves as the handler for the Search button.
          */
         [HttpPost]
         public ActionResult ShowHotelDeals(IFormCollection frmCollection)
